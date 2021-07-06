@@ -3,7 +3,9 @@
 
 namespace ComposerIncludeFiles\models;
 use mysqli;
-require_once 'config.php';
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__)  . $ds . '..') . $ds;
+require_once("{$base_dir}config{$ds}config.php");
 
 class db_products {
     private $productName;

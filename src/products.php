@@ -1,10 +1,12 @@
 
 <?php include 'templates\header.php';?>
 <?php
-
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__)  . $ds . '..') . $ds;
+require_once("{$base_dir}src{$ds}config{$ds}config.php");
 use function ComposerIncludeFiles\controllers\dbgetvar;
 use function ComposerIncludeFiles\controllers\dbpostvar;
-include 'C:\Users\wdziwoki\PhpstormProjects\product-catalog\src\controllers\product_controller.php';
+include 'controllers\product_controller.php';
 
 ?>
 <br>

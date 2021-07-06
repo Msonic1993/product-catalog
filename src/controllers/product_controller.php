@@ -4,8 +4,8 @@
 namespace ComposerIncludeFiles\controllers;
 use ComposerIncludeFiles\models\db_products;
 use mysqli;
-include 'C:\Users\wdziwoki\PhpstormProjects\product-catalog\src\models\db_products.php';
-require_once "config.php";
+include 'models\db_products.php';
+require_once 'config\config.php';
 
 function dbgetvar(){
     if ($_SERVER["REQUEST_METHOD"] == "GET") {

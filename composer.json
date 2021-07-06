@@ -20,10 +20,16 @@
       "ext-mysql": "*",
         "ext-mysqli": "*"
     },
+    "config": {
+        "optimize-autoloader": true
+    },
     "autoload": {
         "psr-4": {
-            "ComposerIncludeFiles\\": "src"
-        }
+            "ComposerIncludeFiles\\": "src/"
+        },
+        "classmap": [
+            "src/"
+        ]
     },
     "extra": {
         "class": "ComposerIncludeFiles\\Plugin"
