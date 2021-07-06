@@ -2,26 +2,30 @@
 
 
 namespace ComposerIncludeFiles\controllers;
+use ComposerIncludeFiles\models\db_products;
 use mysqli;
-
+include 'C:\Users\wdziwoki\PhpstormProjects\product-catalog\src\models\db_products.php';
 require_once "config.php";
 
-     function dbgetvar(){
-        $mysqli = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        if($_SERVER["REQUEST_METHOD"] == "GET") {
-            $sql = "SELECT * FROM product ";
-            $result = $mysqli->query($sql);
+function dbgetvar(){
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $p = new db_products(0,0,0);
+        $result = $p->getAll();
 
-            if ($result->num_rows > 0) {
-                return $result;
-                }
-            } else {
-                return "0 results";
-            }
-            $mysqli->close();
-
-
+    }
+    return $result;
+}
+function dbpostvar(){
+    if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $productName = $_POST['productName'];
+        $productDesc = $_POST['productDesc'];
+        $productStatus = $_POST['productStatus'];
+        $p = new db_products($productName,$productDesc,$productStatus);
+        $p->createAll();
+        header('Location: ' . 'products.php');
         }
 
+
+}
 
 
