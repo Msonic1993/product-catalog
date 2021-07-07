@@ -1,13 +1,17 @@
-
-<?php include 'templates\header.php';?>
 <?php
+session_start();
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: index.php');
+    exit;
+}
 $ds = DIRECTORY_SEPARATOR;
 $base_dir = realpath(dirname(__FILE__)  . $ds . '..') . $ds;
 require_once("{$base_dir}src{$ds}config{$ds}config.php");
-use function ComposerIncludeFiles\controllers\dbgetvar;
-use function ComposerIncludeFiles\controllers\dbpostvar;
-include 'controllers\product_controller.php';
 
+use function ComposerIncludeFiles\controllers\productGet;
+use function ComposerIncludeFiles\controllers\productPost;
+include 'header.php';
+include 'controllers\product_controller.php';
 ?>
 <br>
 
@@ -32,30 +36,48 @@ include 'controllers\product_controller.php';
         </div>
         <?php
         if(isset($_POST['productName'])){
-            dbpostvar();
+            productPost();
         }?>
     </form>
 
 </div>
 <br>
 <h3>Tabela produktów</h3>
+
+
 <table class="table table-striped">
+    <form method="POST" action=""
     <tr>
+        <th>ID produktu</th>
         <th>Nazwa produktu</th>
         <th>Opis</th>
         <th>Status</th>
         <th>Kategoria</th>
+        <th>Edytuj</th>
+        <th>Usuń</th>
     </tr>
-    <?php  foreach(dbgetvar() as $row): ?>
+
+    <?php  foreach(productGet() as $row): ?>
     <tr>
+        <td><?=$row['id'];?></td>
         <td><?=$row['productName'];?></td>
         <td><?=$row['description'];?></td>
         <td><?=$row['status'];?></td>
         <td><?=$row['categoryName'];?></td>
+        <td><a href="editproduct.php?id=<?php echo $row['id']; ?>">Edytuj</a></td>
+        <td><button type="submit" name="deleteItem" value="<?php echo $row['id']; ?>" class="btn btn-danger">Usuń</button></td>
 
     </tr>
         <?php endforeach;?>
+    <?php
+    if(isset($_POST['deleteItem'])){
+        productPost();
+    }?>
 </table>
-<?php include 'templates\footer.php';?>
+
+</form>
+
+
+<?php include 'footer.php';?>
 </body>
 </html>
