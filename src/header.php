@@ -26,7 +26,7 @@
                 <a class="nav-link" href="products.php">Produkty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#">Tu mają być kategorie..</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="logout.php">Wylogowanie</a>
